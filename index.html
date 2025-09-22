@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notre Photo en Carousel</title>
+  <!-- Font Awesome (icônes) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="container-carousel">
+    <h1 class="title">Nos Photos</h1>
+
+    <div class="inner-carousel">
+      <img src="assets/img/img1.png" class="slide">
+      <img src="assets/img/img2.jpg" class="slide active">
+      <img src="assets/img/img3.jpg" class="slide">
+      <img src="assets/img/img1.png" class="slide">
+      <img src="assets/img/img2.jpg" class="slide active">
+      <img src="assets/img/img3.jpg" class="slide">
+    </div>
+
+    <div class="btn">
+      <button class="prev">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <button id="btn-show-all">
+        <i class="fa-solid fa-images"></i>
+      </button>
+
+      <button class="next">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Section modale pour voir toutes les photos -->
+  <div class="gallery-modal" id="gallery-modal">
+    <div class="gallery-content">
+      <button class="close-gallery" id="close-gallery">&times;</button>
+      <h2>Toutes les Photos</h2>
+      <div class="gallery-grid">
+        <img src="assets/img/img1.png" alt="">
+        <img src="assets/img/img2.jpg" alt="">
+        <img src="assets/img/img3.jpg" alt="">
+        <img src="assets/img/img1.png" alt="">
+        <img src="assets/img/img2.jpg" alt="">
+        <img src="assets/img/img3.jpg" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox (image en plein écran) -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <img class="lightbox-image" id="lightbox-image" src="">
+  </div>
+  <script src="assets/js/srcipt.js"></script>
+</body>
+</html>
