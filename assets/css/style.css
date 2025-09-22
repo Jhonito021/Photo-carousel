@@ -13,6 +13,16 @@ body {
   background: #111;
 }
 
+
+.music-btn button {
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
 .container-carousel {
   position: relative;
   background: black;

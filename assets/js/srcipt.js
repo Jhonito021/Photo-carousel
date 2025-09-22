@@ -57,3 +57,31 @@ lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"
 lightbox.addEventListener("click", (e) => {
   if (e.target === lightbox) lightbox.classList.remove("active");
 });
+
+
+
+//music
+const bgMusic = document.getElementById("bg-music");
+
+// Vérifie si l'élément existe
+if (bgMusic) {
+  bgMusic.volume = 0.3;
+
+  // Tenter de jouer automatiquement
+  bgMusic.play().catch(() => {
+    // Autoplay bloqué → lancer au premier clic
+    document.body.addEventListener("click", () => bgMusic.play(), { once: true });
+  });
+}
+
+// Bouton pour activer / désactiver la musique
+const toggleMusic = document.getElementById("bg-music");
+if (toggleMusic) {
+  toggleMusic.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play();
+    } else {
+      bgMusic.pause();
+    }
+  });
+}
