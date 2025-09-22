@@ -23,10 +23,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0 0 25px rgba(255, 0, 100, 0.4);
 }
 
 h1.title {
-  margin-top: 10px;
+  margin-top: 20px;
   color: white;
   text-align: center;
   font-size: 1.5rem;
@@ -109,6 +110,7 @@ i {
   align-items: center;
   z-index: 1000;
   padding: 20px;
+  animation: fadeIn 0.3s ease;
 }
 
 .gallery-modal.active {
@@ -165,8 +167,8 @@ i {
 }
 
 .lightbox-image {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 70%;
+  max-height: 70%;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
   animation: fadeIn 0.3s ease-in-out;
