@@ -10,15 +10,20 @@
 </head>
 <body>
 
-  <audio id="bg-music" src="assets/audio/Billie Eilish Ocean Eyes Official Music Video_dnt.mp3" loop></audio>
+  <audio id="bg-music" src="assets/audio/Billie Eilish Ocean Eyes Official Music Video_dnt.mp3"></audio>
 
 
-  <div class="container-carousel">
-    <h1 class="title">Nos Photos</h1>
+<div class="container-carousel">
+  <i class="fa-solid fa-gear gear-big"></i>
+  <i class="fa-solid fa-gear gear-small"></i>
+  <span class="heart-cannard">🐤💗</span>
+  <h1 class="title">
+    Jho <i class="fa-solid fa-heart heart"></i> Lii
+  </h1>
 
-    <div class="inner-carousel" id="carousel-container">
-  <!-- Les images seront générées en JS -->
-</div>
+  <div class="inner-carousel" id="carousel-container">
+    <!-- Les images seront générées en JS -->
+  </div>
 
 <div class="btn">
   <button class="prev">
@@ -48,18 +53,30 @@
   </button>
 </div>
 
-<!-- Section modale pour voir toutes les musiques-->
- <div class="music-modal" id="music-modal">
+<!-- 🎵 MODAL DE MUSIQUE -->
+<div class="music-modal" id="music-modal">
   <div class="music-content">
     <button class="close-music" id="close-music">
-      <i class="fa-solid fa-xmark" style="color: black;"></i>
+      <i class="fa-solid fa-xmark"></i>
     </button>
-    <h2 style="color: black;">Musiques</h2>
-    <div class="music-grid" id="music-grid">
-      <!--Musique geener automaique-->
-    </div>
+    <h2>Changer la musique</h2>
+    <ul class="music-list">
+      <li data-src="assets/audio/music1.mp3"> 
+        <i class="fa-solid fa-music"></i> Viens on se barre - Allan
+      </li>
+      <li data-src="assets/audio/music2.mp3">
+        <i class="fa-solid fa-music"></i> Ocean Eyes - Billie Eilish
+      </li>
+      <li data-src="assets/audio/music3.mp3">
+        <i class="fa-solid fa-music"></i> Nothing Else Matters - Metallica
+      </li>
+      <li data-src="assets/audio/music4.mp3">
+        <i class="fa-solid fa-music"></i> Hafa Mintsy - Reko
+      </li>
+    </ul>
   </div>
- </div>
+</div>
+
 
 <!-- Section modale pour voir toutes les photos -->
 <div class="gallery-modal" id="gallery-modal">
