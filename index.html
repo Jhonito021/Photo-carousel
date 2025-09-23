@@ -16,55 +16,64 @@
   <div class="container-carousel">
     <h1 class="title">Nos Photos</h1>
 
-    <div class="inner-carousel">
-      <img src="assets/img/img1.jpeg" class="slide">
-      <img src="assets/img/img2.jpeg" class="slide active">
-      <img src="assets/img/img3.jpeg" class="slide">
-      <img src="assets/img/img4.jpeg" class="slide">
-      <img src="assets/img/img5.jpeg" class="slide">
-      <img src="assets/img/img6.jpeg" class="slide">
-    </div>
+    <div class="inner-carousel" id="carousel-container">
+  <!-- Les images seront générées en JS -->
+</div>
 
-    <div class="btn">
-      <button class="prev">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
+<div class="btn">
+  <button class="prev">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
 
-      <button id="btn-show-all">
-        <i class="fa-solid fa-images"></i>
-      </button>
+  <button id="btn-show-all">
+    <i class="fa-solid fa-images"></i>
+  </button>
 
-      <button id="toggle-autoplay" class="btn btn-secondary">
-        <i class="fas fa-pause"></i> <!-- Icône pause au départ -->
-      </button>
+  <button id="toggle-autoplay" class="btn-secondary">
+    <i class="fas fa-pause"></i>
+  </button>
 
-      <button id="toggle-music">
-        <i class="fa-solid fa-music"></i>
-      </button>
+  <button id="toggle-music">
+    <i class="fa-solid fa-volume-high"></i>
+  </button>
 
-      <button class="next">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-    </div>
-  </div>
+  <button class="next">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+</div>
 
-  <!-- Section modale pour voir toutes les photos -->
-  <div class="gallery-modal" id="gallery-modal">
-    <div class="gallery-content">
-      <button class="close-gallery" id="close-gallery">
-        <i class="fa-solid fa-xmark" style="color: black;"></i>
-      </button>
-      <h2>Toutes les Photos</h2>
-      <div class="gallery-grid">
-        <img src="assets/img/img1.jpeg" alt="">
-        <img src="assets/img/img2.jpeg" alt="">
-        <img src="assets/img/img3.jpeg" alt="">
-        <img src="assets/img/img4.jpeg" alt="">
-        <img src="assets/img/img5.jpeg" alt="">
-        <img src="assets/img/img6.jpeg" alt="">
-      </div>
+<div class="select-music">
+  <button class="btn-select-music" id="btn-show-music" style="color: white;">
+    <i class="fa-solid fa-music"></i> Musique
+  </button>
+</div>
+
+<!-- Section modale pour voir toutes les musiques-->
+ <div class="music-modal" id="music-modal">
+  <div class="music-content">
+    <button class="close-music" id="close-music">
+      <i class="fa-solid fa-xmark" style="color: black;"></i>
+    </button>
+    <h2 style="color: black;">Musiques</h2>
+    <div class="music-grid" id="music-grid">
+
     </div>
   </div>
+ </div>
+
+<!-- Section modale pour voir toutes les photos -->
+<div class="gallery-modal" id="gallery-modal">
+  <div class="gallery-content">
+    <button class="close-gallery" id="close-gallery">
+      <i class="fa-solid fa-xmark" style="color: black;"></i>
+    </button>
+    <h2>Toutes les Photos</h2>
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- Images générées automatiquement -->
+    </div>
+  </div>
+</div>
+
 
   <!-- Lightbox (image en plein écran) -->
   <div class="lightbox" id="lightbox">

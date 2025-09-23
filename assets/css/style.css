@@ -26,7 +26,7 @@ body {
 .container-carousel {
   position: relative;
   background: black;
-  height: 600px;
+  padding: 20px 0;
   width: 400px;
   border-radius: 8px;
   overflow: hidden;
@@ -45,7 +45,7 @@ h1.title {
 
 .inner-carousel {
   display: flex;
-  margin-top: 10px;
+  margin: 20px 0;
   height: 420px;
   position: relative;
 }
@@ -71,7 +71,6 @@ img {
 .btn {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
   gap: 3rem;
 }
 
@@ -85,6 +84,21 @@ button {
 i {
   color: white;
   font-size: 20px;
+}
+
+.fa-music {
+  padding: 5px;
+}
+
+.select-music {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.btn-select-music {
+  border: 1px solid white;
+  padding: 0 5px;
+  border-radius: 8px;
 }
 
 /* Responsive : s'adapte sur tablettes et mobiles */
@@ -111,7 +125,17 @@ i {
   }
 }
 
-.gallery-modal {
+.music-modal.active {
+  display: flex;
+}
+
+.music-content {
+  background: white;
+  border-radius: 12px;
+  width: 400px;
+}
+
+.gallery-modal, .music-modal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.8);
@@ -120,6 +144,14 @@ i {
   align-items: center;
   z-index: 1000;
   padding: 20px;
+  transition: all 0.3s;
+}
+
+.music-modal {
+  animation: fadeUp 0.3s ease;
+}
+
+.gallery-modal {
   animation: fadeIn 0.3s ease;
 }
 
@@ -198,4 +230,14 @@ i {
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(70px);
+  } to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

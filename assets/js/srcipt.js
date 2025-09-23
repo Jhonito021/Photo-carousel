@@ -1,11 +1,26 @@
-const slides = document.querySelectorAll(".slide");
-let current = 0;
+// ----- GÉNÉRATION DES IMAGES -----
+const totalImages = 45; // Tu peux changer ce nombre si tu ajoutes encore plus de photos
+const carouselContainer = document.getElementById("carousel-container");
+const galleryGrid = document.getElementById("gallery-grid");
 
-// ----- FONCTIONS -----
+for (let i = 1; i <= totalImages; i++) {
+  const imgCarousel = document.createElement("img");
+  imgCarousel.src = `assets/img/img${i}.jpeg`;
+  imgCarousel.classList.add("slide");
+  if (i === 1) imgCarousel.classList.add("active"); // 2ᵉ image active par défaut
+  carouselContainer.appendChild(imgCarousel);
+
+  const imgGallery = document.createElement("img");
+  imgGallery.src = `assets/img/img${i}.jpeg`;
+  galleryGrid.appendChild(imgGallery);
+}
+
+// ----- SLIDES -----
+const slides = document.querySelectorAll(".slide");
+let current = 1; // commence sur la 2e image
+
 function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
-  });
+  slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
 }
 
 function nextSlide() {
@@ -13,92 +28,91 @@ function nextSlide() {
   showSlide(current);
 }
 
-// ----- INITIALISATION -----
-showSlide(current);
-
-// ----- BOUTONS CAROUSEL -----
-document.querySelector(".next").addEventListener("click", () => {
-  nextSlide();
-});
+// ----- CONTROLES -----
+document.querySelector(".next").addEventListener("click", nextSlide);
 
 document.querySelector(".prev").addEventListener("click", () => {
   current = (current - 1 + slides.length) % slides.length;
   showSlide(current);
 });
 
-// ----- DÉFILEMENT AUTOMATIQUE -----
+// Défilement automatique
 let autoPlayEnabled = true;
 let autoPlayInterval = setInterval(nextSlide, 5000);
 
-// ----- TOGGLE AUTO-PLAY -----
+// Bouton pause/play autoplay
 const toggleAutoplayBtn = document.getElementById("toggle-autoplay");
-if (toggleAutoplayBtn) {
-  const toggleIcon = toggleAutoplayBtn.querySelector("i");
+const toggleIcon = toggleAutoplayBtn.querySelector("i");
 
-  toggleAutoplayBtn.addEventListener("click", () => {
-    autoPlayEnabled = !autoPlayEnabled;
+toggleAutoplayBtn.addEventListener("click", () => {
+  autoPlayEnabled = !autoPlayEnabled;
+  if (autoPlayEnabled) {
+    toggleIcon.classList.replace("fa-play", "fa-pause");
+    autoPlayInterval = setInterval(nextSlide, 5000);
+  } else {
+    toggleIcon.classList.replace("fa-pause", "fa-play");
+    clearInterval(autoPlayInterval);
+  }
+});
 
-    if (autoPlayEnabled) {
-      toggleIcon.classList.replace("fa-play", "fa-pause");
-      autoPlayInterval = setInterval(nextSlide, 5000);
-    } else {
-      toggleIcon.classList.replace("fa-pause", "fa-play");
-      clearInterval(autoPlayInterval);
-    }
+// ----- MUSIC MODAL-----
+const musicModal = document.getElementById ("music-modal");
+document.getElementById ("btn-show-music").addEventListener ("click", () => {
+    musicModal.classList.add("active");
+});
+document.getElementById ("close-music").addEventListener ("click", () => {
+    musicModal.classList.remove("active");
+});
+musicModal.addEventListener("click", (e) => {
+    if (e.target === musicModal) musicModal.classList.remove("active");
+});
 
-    // Petite animation visuelle
-    toggleAutoplayBtn.classList.add("clicked");
-    setTimeout(() => toggleAutoplayBtn.classList.remove("clicked"), 300);
-  });
-}
-
-// ----- GESTION GALERIE -----
+// ----- GALERIE -----
 const galleryModal = document.getElementById("gallery-modal");
-const btnShowAll = document.getElementById("btn-show-all");
-const closeGallery = document.getElementById("close-gallery");
-
-if (btnShowAll) {
-  btnShowAll.addEventListener("click", () => galleryModal.classList.add("active"));
-}
-
-if (closeGallery) {
-  closeGallery.addEventListener("click", () => galleryModal.classList.remove("active"));
-}
-
-if (galleryModal) {
-  galleryModal.addEventListener("click", (e) => {
-    if (e.target === galleryModal) galleryModal.classList.remove("active");
-  });
-}
+document.getElementById("btn-show-all").addEventListener("click", () => {
+  galleryModal.classList.add("active");
+});
+document.getElementById("close-gallery").addEventListener("click", () => {
+  galleryModal.classList.remove("active");
+});
+galleryModal.addEventListener("click", (e) => {
+  if (e.target === galleryModal) galleryModal.classList.remove("active");
+});
 
 // ----- LIGHTBOX -----
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
 const lightboxClose = document.getElementById("lightbox-close");
 
-document.querySelectorAll(".gallery-grid img").forEach(img => {
+galleryGrid.querySelectorAll("img").forEach(img => {
   img.addEventListener("click", () => {
     lightboxImage.src = img.src;
     lightbox.classList.add("active");
   });
 });
 
-if (lightboxClose) {
-  lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
-}
-
-if (lightbox) {
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) lightbox.classList.remove("active");
-  });
-}
+lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) lightbox.classList.remove("active");
+});
 
 // ----- MUSIQUE -----
 const bgMusic = document.getElementById("bg-music");
+const toggleMusic = document.getElementById("toggle-music");
 
 if (bgMusic) {
   bgMusic.volume = 0.3;
   bgMusic.play().catch(() => {
     document.body.addEventListener("click", () => bgMusic.play(), { once: true });
+  });
+
+  toggleMusic.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play();
+      toggleMusic.querySelector("i").classList.replace("fa-volume-xmark", "fa-volume-high");
+    } else {
+      bgMusic.pause();
+      toggleMusic.querySelector("i").classList.replace("fa-volume-high", "fa-volume-xmark");
+    }
   });
 }
