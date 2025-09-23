@@ -53,7 +53,7 @@ h1.title {
 img {
   object-fit: cover;
   height: 100%;
-  width: 400px;
+  width: 100%;
 }
 
 .slide {
