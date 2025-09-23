@@ -1,50 +1,81 @@
 const slides = document.querySelectorAll(".slide");
 let current = 0;
 
-// Afficher la slide courante
+// ----- FONCTIONS -----
 function showSlide(index) {
   slides.forEach((slide, i) => {
     slide.classList.toggle("active", i === index);
   });
 }
 
-showSlide(current);
-
-// Bouton suivant
-document.querySelector(".next").addEventListener("click", () => {
+function nextSlide() {
   current = (current + 1) % slides.length;
   showSlide(current);
+}
+
+// ----- INITIALISATION -----
+showSlide(current);
+
+// ----- BOUTONS CAROUSEL -----
+document.querySelector(".next").addEventListener("click", () => {
+  nextSlide();
 });
 
-// Bouton précédent
 document.querySelector(".prev").addEventListener("click", () => {
   current = (current - 1 + slides.length) % slides.length;
   showSlide(current);
 });
 
-// Défilement automatique
-setInterval(() => {
-  current = (current + 1) % slides.length;
-  showSlide(current);
-}, 5000);
+// ----- DÉFILEMENT AUTOMATIQUE -----
+let autoPlayEnabled = true;
+let autoPlayInterval = setInterval(nextSlide, 5000);
+
+// ----- TOGGLE AUTO-PLAY -----
+const toggleAutoplayBtn = document.getElementById("toggle-autoplay");
+if (toggleAutoplayBtn) {
+  const toggleIcon = toggleAutoplayBtn.querySelector("i");
+
+  toggleAutoplayBtn.addEventListener("click", () => {
+    autoPlayEnabled = !autoPlayEnabled;
+
+    if (autoPlayEnabled) {
+      toggleIcon.classList.replace("fa-play", "fa-pause");
+      autoPlayInterval = setInterval(nextSlide, 5000);
+    } else {
+      toggleIcon.classList.replace("fa-pause", "fa-play");
+      clearInterval(autoPlayInterval);
+    }
+
+    // Petite animation visuelle
+    toggleAutoplayBtn.classList.add("clicked");
+    setTimeout(() => toggleAutoplayBtn.classList.remove("clicked"), 300);
+  });
+}
 
 // ----- GESTION GALERIE -----
 const galleryModal = document.getElementById("gallery-modal");
 const btnShowAll = document.getElementById("btn-show-all");
 const closeGallery = document.getElementById("close-gallery");
 
-btnShowAll.addEventListener("click", () => galleryModal.classList.add("active"));
-closeGallery.addEventListener("click", () => galleryModal.classList.remove("active"));
-galleryModal.addEventListener("click", (e) => {
-  if (e.target === galleryModal) galleryModal.classList.remove("active");
-});
+if (btnShowAll) {
+  btnShowAll.addEventListener("click", () => galleryModal.classList.add("active"));
+}
+
+if (closeGallery) {
+  closeGallery.addEventListener("click", () => galleryModal.classList.remove("active"));
+}
+
+if (galleryModal) {
+  galleryModal.addEventListener("click", (e) => {
+    if (e.target === galleryModal) galleryModal.classList.remove("active");
+  });
+}
 
 // ----- LIGHTBOX -----
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
 const lightboxClose = document.getElementById("lightbox-close");
 
-// Ouvrir la lightbox au clic sur une image de la galerie
 document.querySelectorAll(".gallery-grid img").forEach(img => {
   img.addEventListener("click", () => {
     lightboxImage.src = img.src;
@@ -52,36 +83,22 @@ document.querySelectorAll(".gallery-grid img").forEach(img => {
   });
 });
 
-// Fermer la lightbox
-lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) lightbox.classList.remove("active");
-});
+if (lightboxClose) {
+  lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
+}
 
-
-
-//music
-const bgMusic = document.getElementById("bg-music");
-
-// Vérifie si l'élément existe
-if (bgMusic) {
-  bgMusic.volume = 0.3;
-
-  // Tenter de jouer automatiquement
-  bgMusic.play().catch(() => {
-    // Autoplay bloqué → lancer au premier clic
-    document.body.addEventListener("click", () => bgMusic.play(), { once: true });
+if (lightbox) {
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) lightbox.classList.remove("active");
   });
 }
 
-// Bouton pour activer / désactiver la musique
-const toggleMusic = document.getElementById("bg-music");
-if (toggleMusic) {
-  toggleMusic.addEventListener("click", () => {
-    if (bgMusic.paused) {
-      bgMusic.play();
-    } else {
-      bgMusic.pause();
-    }
+// ----- MUSIQUE -----
+const bgMusic = document.getElementById("bg-music");
+
+if (bgMusic) {
+  bgMusic.volume = 0.3;
+  bgMusic.play().catch(() => {
+    document.body.addEventListener("click", () => bgMusic.play(), { once: true });
   });
 }
